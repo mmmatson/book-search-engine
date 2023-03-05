@@ -8,14 +8,12 @@ import { useQuery , useMutation } from '@apollo/client';
 // import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
-
-// Set up mutation with an option to handle errors
-const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
   
 const SavedBooks = () => {
     // Execute the query on component load
     const { loading, data } = useQuery(GET_ME);
-  
+    const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
+
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const userData = data?.me || [];
 

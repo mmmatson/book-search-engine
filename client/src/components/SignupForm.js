@@ -5,9 +5,6 @@ import { useMutation } from '@apollo/client';
 
 import Auth from '../utils/auth';
 
-// Set up mutation with an option to handle errors
-const [addUser, {error}] = useMutation(ADD_USER);
-
 const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
@@ -15,6 +12,8 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+
+  const [addUser, {error}] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
