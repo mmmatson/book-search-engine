@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-
+import { useQuery , useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from "../utils/mutations";
-import { useQuery , useMutation } from '@apollo/client';
-
-// import { getMe, deleteBook } from '../utils/API';
-import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import Auth from '../utils/auth';
   
 const SavedBooks = () => {
     // Execute the query on component load
     const { loading, data } = useQuery(GET_ME);
-    const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
+    const [removeBook, {error}] = useMutation(REMOVE_BOOK);
 
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const userData = data?.me || [];
@@ -26,7 +23,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await removeBook(bookId, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
